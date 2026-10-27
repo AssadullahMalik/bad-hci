@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    /* Bad HCI demo: inconsistent base font stack */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Plus Jakarta Sans', cursive, system-ui;
+    scroll-behavior: smooth;
+    color: #0f172a;
+    background-color: #f8fafc;
+  }
+
+  html.dark {
+    color: #f1f5f9;
+    background-color: #090d16;
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Focus indicators complying with NFR-ACC-05 */
+  :focus-visible {
+    outline: 2px solid #0d9488;
+    outline-offset: 2px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Bad HCI — Academic Demonstration styles                             */
+/* ------------------------------------------------------------------ */
+
+.font-times {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.font-courier {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.font-windover {
+  font-family: 'Windsor MT', Impact, 'Arial Black', sans-serif;
+}
+
+/* Partially low-contrast combinations (kept just readable for demo) */
+.lowcon-1 { color: #a7a7a7; }
+.lowcon-2 { color: #9db4c0; }
+.lowcon-3 { color: #b18a9e; }
+
+.bad-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: bad-marquee 22s linear infinite;
+}
+
+@keyframes bad-marquee {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
+}
+
+.blink-attention {
+  animation: bad-blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes bad-blink {
+  to { visibility: hidden; }
+}
+
+.slightly-tilted {
+  transform: rotate(-0.6deg);
+}
+
+.wobbly-border {
+  border: 3px ridge #b87333;
+  border-radius: 22px 6px 18px 8px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Bad HCI — layout helpers (responsive / Fitts degradations only)      */
+/* NOTE: the deliberate low-contrast wash layer has been removed.        */
+/* ------------------------------------------------------------------ */
+
+/* Poor Responsive Design helpers: forced horizontal scroll + overlap */
+.bad-overflow {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.bad-overflow > .bad-wide {
+  min-width: 1400px;
+}
+.bad-overlap {
+  position: relative;
+}
+.bad-overlap > .badge-collision {
+  position: absolute;
+  top: -14px;
+  left: 8px;
+  right: -22px;
+  z-index: 20;
+}
+
+/* Tiny click targets (Fitts's Law failure) */
+.tiny-target {
+  padding: 1px 3px;
+  font-size: 9px;
+  line-height: 1;
+  min-width: 0;
+  min-height: 0;
+}
